@@ -1,0 +1,348 @@
+<div class="container-fluid " style="background-color:white">
+  <!-- <div class="row"> -->
+
+  <!-- Mobile-view -->
+  <div class="displayBlockMobile ">
+    <div class="col-sm-12 p-0">
+      <nav class="navbar navbar-expand-md navbar-fixed navbar-dark " style="background-color:rgb(5, 5, 128);">
+        <a class="navbar-brand" style="font-size:1.5em; color: white" [routerLink]="['/userDashboard']">Issue Tracker
+          Tool</a>
+
+        <div class="input-group my-2 my-lg-0">
+          <input type="text" class="form-control" placeholder="Search" aria-label="Search" [(ngModel)]="text">
+          <div class="input-group-append">
+
+            <button class="btn btn-light " type="submit" (click)="searchedIssue()"  data-toggle="modal"
+              ><i class="fa fa-search fa-1.5x" aria-hidden="true"></i></button>
+          </div>
+        </div>
+
+
+        <form class="form-inline my-2 my-lg-0">
+          <button class="btn btn-light  my-2 my-sm-0" style="border-radius: 50px;" type="button" data-toggle="modal"
+            data-target="#exampleModalLong"><i class="fa fa-bell fa-1.5x" aria-hidden="true"></i><span
+              class="badge badge-info">{{notificationArraySize}}</span>
+          </button>
+        </form>
+
+        <button type="button" class="btn btn-light  " style="border-radius: 50px;" [routerLink]="['/create-issue']"><i
+            class="fa fa-plus" aria-hidden="true"></i><span class="badge badge-light">Issue</span></button>
+
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+
+          <span class="navbar-toggler-icon"></span>
+
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <div class="profile" style="float:right">
+                <h5 style="color: white; text-transform:uppercase">{{fullName}}</h5>
+                <button style="width: 150px; margin-left: 0px" class="btn btn-outline-light"
+                  *ngIf="socialFlag == 'false'" (click)=" logout()">LogOut</button>
+                <button style="width: 150px; margin-left: 0px" class="btn btn-outline-light"
+                  *ngIf="socialFlag == 'true'" (click)=" socialLogout()">LogOut</button>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div class='row '>
+        <div class='col-12'>
+
+          <ul class="nav nav-tabs justify-content-center " role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" style="font-weight: bold;" data-toggle="tab" role="tab" aria-selected="true"
+                (click)="getLoggedInUserAssigneedIssues()">Assigned
+                Issues</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" style="font-weight: bold;" data-toggle="tab" role="tab" aria-selected="false"
+                (click)="getAllIssues()">All Issues</a>
+            </li>
+
+          </ul>
+        </div>
+        <div class="col-md-9 mt-1 ml-0">
+          <table class='table table-bordered table-condensed table-striped table-hover'
+            *ngIf="loggedInUserIssueFlag == true">
+            <thead class="thead-dark">
+              <tr>
+                <th>IssueId</th>
+                <th>Title</th>
+                <th>Reporter</th>
+                <th>Status</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="clearfix cursorPointer"
+                *ngFor="let issue of listOfAssigneedIssues | paginate: { itemsPerPage: count, currentPage: p }"
+                (click)="issueSelected(issue.issueId)" [routerLink]="['/issue-description-view']">
+                <td>{{issue.issueId}}</td>
+                <td>{{issue.title}}</td>
+                <td>{{issue.reporter}}</td>
+                <td>{{issue.status}}</td>
+                <td>{{issue.date}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls> -->
+          <table class='table table-bordered table-condensed table-striped table-hover'
+            *ngIf="loggedInUserIssueFlag == false">
+            <thead class="thead-dark">
+              <tr>
+                <th>IssueId</th>
+                <th>Title</th>
+                <th>Reporter</th>
+                <th>Status</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="clearfix cursorPointer"
+                *ngFor="let issue of listOfAllIssues | paginate: { itemsPerPage: count, currentPage: p }"
+                (click)="issueSelected(issue.issueId)" [routerLink]="['/issue-description-view']">
+                <td>{{issue.issueId}}</td>
+                <td>{{issue.title}}</td>
+                <td>{{issue.reporter}}</td>
+                <td>{{issue.status}}</td>
+                <td>{{issue.date}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls> -->
+        </div>
+        <br>
+        <div class=" justify-content: center;">
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Non-Mobile-view -->
+  <div class="col-12 displayNoneMobile p-0">
+
+    <div class="row ml-auto">
+      <div class="col-3  p-2" style="height: 100vh; background-color: rgb(5, 5, 128);">
+        <a class="text-light p-0 mr-2" style="text-align: center ;font-size:1.5em "
+          [routerLink]="['/userDashboard']"><b>Issue Tracker Tool</b></a>
+
+        <hr class="new2">
+
+        <div class="list-group " style="margin-bottom: 100px">
+          <div class="accordion" id="accordionExample">
+
+            <div class="card mt-1">
+              <div class="input-group my-2 my-lg-0">
+                <input type="text" class="form-control" placeholder="Search" aria-label="Search" [(ngModel)]="text">
+                <div class="input-group-append">
+
+                  <button class="btn btn-light " type="submit" (click)="searchedIssue()"  data-toggle="modal"
+                    ><i class="fa fa-search fa-1.5x"
+                      aria-hidden="true"></i></button>
+                </div>
+              </div>
+            </div>
+            <div class="card mt-2">
+
+              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                aria-expanded="true" aria-controls="collapseOne"
+                style="text-align: center;font-size: 1.25em ;text-transform:uppercase">
+                {{fullName}} <i class="fa fa-user-circle" aria-hidden="true"></i>
+              </button>
+
+              <div id="collapseOne" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body">
+                  <div class="list-group">
+
+                    <button type="button" class="list-group-item list-group-item-action active"
+                      style="text-align: center;font-size: 1.25em " *ngIf="socialFlag == 'false'" (click)=" logout()">
+                      LogOut
+                    </button>
+
+                    <button type="button" class="list-group-item list-group-item-action active"
+                      style="text-align: center;font-size: 1.25em " *ngIf="socialFlag == 'true'"
+                      (click)=" socialLogout()">
+                      LogOut
+                    </button>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card mt-2">
+              <button type="button" class="btn btn-link">
+                <i class="fa fa-bell fa-1.5x p-0 m-0" aria-hidden="true"> <button type="button" class="btn btn-link"
+                    style="font-size:1.20em;" data-toggle="modal"
+                    data-target="#exampleModalLong">
+                    Notifications <span class="badge badge-light">{{notificationArraySize}}</span>
+                  </button></i>
+              </button>
+            </div>
+
+            <div class="card mt-2">
+              <button type="button" class="btn btn-link">
+                <i class="fa fa-plus fa-1.5x p-0 m-0" aria-hidden="true"> <button type="button" class="btn btn-link "
+                    style="font-size:1.20em;" [routerLink]="['/create-issue']"> Create-Issue</button></i>
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- End of sidebar -->
+
+      <div class='col-9'>
+
+        <div class="row mt-2">
+          <div class='col-9 '>
+
+            <ul class="nav nav-tabs justify-content-center" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" style="font-weight: bold;" data-toggle="tab" role="tab" aria-selected="true"
+                  (click)="getLoggedInUserAssigneedIssues()">Assigned Issues</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="font-weight: bold;" data-toggle="tab" role="tab" aria-selected="false"
+                  (click)="getAllIssues()">All Issues</a>
+              </li>
+
+            </ul>
+          </div>
+        </div>
+        <hr style="border-top: 1px solid rgb(5, 5, 128);">
+        <div class="row ">
+          <table class='table table-bordered table-condensed table-striped table-hover p-1 m-1'
+            *ngIf="loggedInUserIssueFlag == true">
+            <thead class="thead-dark">
+              <tr>
+                <th>IssueId</th>
+                <th>Title</th>
+                <th>Reporter</th>
+                <th>Status</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="clearfix cursorPointer"
+                *ngFor="let issue of listOfAssigneedIssues | paginate: { itemsPerPage: count, currentPage: p }"
+                (click)="issueSelected(issue.issueId)" [routerLink]="['/issue-description-view']">
+                <td>{{issue.issueId}}</td>
+                <td>{{issue.title}}</td>
+                <td>{{issue.reporter}}</td>
+                <td>{{issue.status}}</td>
+                <td>{{issue.date}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class='table table-bordered table-condensed table-striped table-hover p-1 m-1'
+            *ngIf="loggedInUserIssueFlag == false">
+            <thead class="thead-dark">
+              <tr>
+                <th>IssueId</th>
+                <th>Title</th>
+                <th>Reporter</th>
+                <th>Status</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="clearfix cursorPointer"
+                *ngFor="let issue of listOfAllIssues | paginate: { itemsPerPage: count, currentPage: p }"
+                (click)="issueSelected(issue.issueId)" [routerLink]="['/issue-description-view']">
+                <td>{{issue.issueId}}</td>
+                <td>{{issue.title}}</td>
+                <td>{{issue.reporter}}</td>
+                <td>{{issue.status}}</td>
+                <td>{{issue.date}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <br>
+        <div class="text-right" style="display: flex; justify-content: center; ">
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- </div> -->
+</div>
+
+
+<div class="modal fade" id="exampleModalScrollable"  role="dialog" aria-labelledby="exampleModalScrollableTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalScrollableTitle">Searched Result </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class='table table-bordered table-condensed table-striped table-hover'>
+          <thead class="thead-dark">
+            <tr>
+              <th>IssueId</th>
+              <th>Title</th>
+              <th>Reporter</th>
+              <th>Status</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="clearfix cursorPointer" 
+              *ngFor="let issue of listOfSearchedIssue"
+              (click)="issueSelectedFromSearch(issue.issueId)" [routerLink]="['/issue-description-view']"
+              data-dismiss="modal">
+              <td>{{issue.issueId}}</td>
+              <td>{{issue.title}}</td>
+              <td>{{issue.reporter}}</td>
+              <td>{{issue.status}}</td>
+              <td>{{issue.date}}</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Notifications</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <ul *ngFor="let notification of listOfNotification">
+              <li  class="dropdown-item" (click)=" issueSelectedFromNotification(notification.details.notificationId)"[routerLink]="['/issue-description-view']" data-dismiss="modal">{{notification.message}}</li>
+          </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>

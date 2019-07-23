@@ -1,0 +1,58 @@
+hr.new2 {
+    border-top: 1px solid white;
+  }
+
+  .list-group1{
+    max-height: 250px;
+
+
+    /* margin-bottom: 10px; */
+    overflow:scroll;
+    -webkit-overflow-scrolling: touch;
+}
+.libg{
+    background-color: #F5EEF8
+}
+@media only screen and (max-width: 768px) {
+  .noneMobileView
+  {
+    display: none
+  }
+  .mobileView
+  {
+    display: block
+  }
+}
+
+
+@media only screen and (min-width: 768px) {
+
+  .noneMobileView
+  {
+    display: block
+  }
+  .mobileView
+  {
+    display: none
+  }
+  
+}
+
+body {
+  margin: 0;
+  font-family: "Lato", sans-serif;
+}
+
+.cursorPointer {
+  cursor: pointer;
+}
+.navbar {
+  background-color:#0e2cb4;
+}
+
+
+.pointer {cursor: pointer;}
+
+p:hover {
+  cursor: hand ;
+}

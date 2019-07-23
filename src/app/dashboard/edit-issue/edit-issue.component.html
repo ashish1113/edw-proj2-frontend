@@ -1,0 +1,118 @@
+<body>
+  <div class="container-fluid  h-100  w-100">
+    <div class="row">
+      <div class="col-12 p-0 ">
+        <nav class="navbar  navbar-fixed navbar-dark w-100  " style="background-color: rgb(5, 5, 128)">
+          <a class="navbar-brand" style="font-size:1.5em; color: white"
+            [routerLink]="['/userDashboard']">IssueTrackerTool</a>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+
+            <span class="navbar-toggler-icon" style="color:white"></span>
+
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ">
+              <li class="nav-item active">
+                <div class="profile" style="float:right">
+                  <h5 style="color: white; text-transform:uppercase">{{fullName}}</h5>
+                  <button style="width: 150px; margin-left: 0px" class="btn btn-outline-light"
+                    (click)="logout()">LogOut</button>
+                  <button style="width: 150px; margin-left: 0px" class="btn btn-outline-light"
+                    *ngIf="socialFlag == 'true'" (click)=" socialLogout()">LogOut</button>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+      <div class="col-lg-10  col-xl-9 mx-auto">
+        <div class="card card-signin flex-row my-5">
+
+          <div class="card-body">
+            <h5 class="card-title text-center">Edit Issue</h5>
+            <hr style="background-color: darkgrey">
+
+            <form #createEventForm="ngForm">
+              <div class="form-group">
+                <label>ReporterEmail</label>
+                <input type="text" name="email" [(ngModel)]="issueReporterEmail" #email1="ngModel" class="form-control"
+                  readonly>
+              </div>
+              <div class="form-group">
+                <label>Issue-Title</label>
+                <input type="text" name="IssueTitle" [(ngModel)]="issueTitle" #title="ngModel" class="form-control"
+                  placeholder="Enter event title" required>
+              </div>
+
+              <div [hidden]="title.valid || title.pristine" class="alert alert-danger">
+                Event title is required
+              </div>
+
+              <div class="form-group">
+                <label for="Issue-Status">Issue-Status</label>
+                <div class="input-group ">
+                  <select class="form-control clearfix d-flex" id="exampleFormControlSelect1" [(ngModel)]="issueStatus"
+                    name="issueStatus" required>
+                    <option value="" class="bg-info flex-fill ">Select your option</option>
+                    <option>Done</option>
+                    <option>In-BackLog</option>
+                    <option>In-Progress</option>
+                    <option>In-Test</option>
+
+                  </select>
+
+                </div>
+
+              </div>
+              <div class="form-group">
+                <label for="Issue-Description">Issue-Description</label>
+                <quill-editor id="exampleFormControlTextarea1" [(ngModel)]="issueDescription" name="issueDescription"
+                  required (blur)="onEditorBlured($event)" (focus)="onEditorFocused($event)"
+                  (ready)="onEditorCreated($event)" (change)="onContentChanged($event)"></quill-editor>
+              </div>
+
+
+              <div class="form-group">
+                <label for="Issue-Assignee">Issue-Assignee</label>
+                <select required class="form-control" id="exampleFormControlSelect1" [(ngModel)]="issueAssigneeEmail"
+                  name="issueAssigneeEmail" required>
+
+
+                  <option selected value="">Select your option</option>
+                  <option *ngFor="let user of allUser">{{user.userName}}</option>
+
+                </select>
+              </div>
+
+            </form>
+
+
+            <div class="form-group">
+              <label for="Issue-ScreenShot">Issue-ScreenShot</label>
+              <input id="photo" type="file" class="form-control-file">
+
+              <br>
+              <button>
+                <a href="http://192.168.1.82:3000/{{issueScreenShotPath}}" target="_blank"> image </a>
+              </button>
+            </div>
+
+            <!-- <button>
+                    <a href="http://192.168.1.82:3000/{{issueScreenShotPath}}" target="_blank"> image </a>
+                  </button> -->
+
+            <button type="submit" style="margin:5px;" class="btn btn-primary" (click)="editIssue()">submit</button>
+
+
+            <button (click)="goBack()" class="btn btn-primary " style="align-self:center; ">Back</button>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
