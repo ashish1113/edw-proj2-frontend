@@ -117,8 +117,9 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
           }
           this.listOfNotification.push(notificationObj)
         } else {
+          //console.log("notificationMessage :",notificationdata[x].notificationMessage)
           let notificationObj = {
-            message: `${notificationdata[x].notificationMessage.commenter} commented on issue with issueId:-${notificationdata[x].notificationIssueData.issueId}`,
+            message: `${notificationdata[x].notificationMessage} `,
             details: notificationdata[x]
           }
           this.listOfNotification.push(notificationObj)
