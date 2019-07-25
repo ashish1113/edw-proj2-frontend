@@ -6,6 +6,7 @@ import { Cookie } from 'ng2-cookies/ng2-cookies';
 import { Location } from "@angular/common";
 import 'rxjs/add/operator/map';
 import { FileUploader } from 'ng2-file-upload';
+//import { QuillModule } from 'ngx-quill'
 
 
 @Component({
@@ -39,6 +40,7 @@ export class CreateIssueComponent implements OnInit {
   public selectedAssignee: any;
 
   public allUser = [];
+  socialFlag: string;
   constructor(public AppService: AppService, private location: Location, public toastr: ToastrManager, private router: Router, private _route: ActivatedRoute, private el: ElementRef) {
 
   }
@@ -49,6 +51,7 @@ export class CreateIssueComponent implements OnInit {
     this.userInfo = this.AppService.getUserInfoFromLocalstorage();
     console.log('the user Info are', this.userInfo)
     this.fullName = Cookie.get('fullName');
+    this.socialFlag = Cookie.get('socialFlag')
     //this.firstChar = this.fullName[0];
     this.issueReporterEmail = Cookie.get('email')
     this.issueReporterName = this.fullName

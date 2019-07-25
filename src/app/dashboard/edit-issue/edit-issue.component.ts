@@ -39,6 +39,7 @@ export class EditIssueComponent implements OnInit {
 
   public allUser = [];
   displayToken: boolean;
+  socialFlag: string;
 
   constructor(public AppService: AppService, private location: Location, public toastr: ToastrManager, private router: Router, private _route: ActivatedRoute, private el: ElementRef) { }
 
@@ -48,6 +49,7 @@ export class EditIssueComponent implements OnInit {
 
     this.authToken = Cookie.get('authToken');
     console.log('the user Info are', this.userInfo)
+    this.socialFlag = Cookie.get('socialFlag')
     this.fullName = Cookie.get('fullName');
     this.firstChar = this.fullName[0];
 
