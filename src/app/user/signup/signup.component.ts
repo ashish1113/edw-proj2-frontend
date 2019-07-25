@@ -11,7 +11,7 @@ import { ToastrManager } from 'ng6-toastr-notifications';
 export class SignupComponent implements OnInit {
   public firstName: any;
   public lastName: any;
-  public mobileNumber: any;
+  public mobileNumber:Number;
   public email: any;
   public password: any;
 
@@ -21,8 +21,8 @@ export class SignupComponent implements OnInit {
   constructor(public AppService: AppService, public router: Router, private Toastr: ToastrManager) { }
 
   ngOnInit() {
-    this.bodyTag.classList.add('signup-page');
-    this.htmlTag.classList.add('signup-page');
+    // this.bodyTag.classList.add('signup-page');
+    // this.htmlTag.classList.add('signup-page');
   }
 
   public redirectToSignIn: any = () => {
@@ -47,6 +47,9 @@ export class SignupComponent implements OnInit {
       this.Toastr.warningToastr("please enter your password");
     }
     else {
+      
+
+      console.log("type of ph",typeof this.mobileNumber)
       let data = {
         firstName: this.firstName,
         lastName: this.lastName,
