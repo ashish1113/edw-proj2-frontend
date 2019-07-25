@@ -1,4 +1,4 @@
-<div class="container-fluid " style="background-color:white">
+<div class="container-fluid " style=" ">
   <!-- <div class="row"> -->
 
   <!-- Mobile-view -->
@@ -336,8 +336,8 @@
       </div>
       <div class="modal-body">
        
-          <ul *ngFor="let notification of listOfNotification">
-              <li (click)=" issueSelectedFromNotification(notification.details.notificationId)"[routerLink]="['/issue-description-view']" data-dismiss="modal">{{notification.message}}</li>
+          <ul  class="list-group" *ngFor="let notification of listOfNotification">
+              <li class="list-group-item " (click)=" issueSelectedFromNotification(notification.details.notificationId)"[routerLink]="['/issue-description-view']" data-dismiss="modal">{{notification.message}}</li>
           </ul>
         
       </div>

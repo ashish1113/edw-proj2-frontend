@@ -24,15 +24,15 @@
             ],
             "styles": [
               "src/styles.css",
-              "/home/admin1/issueTrackingToolFrontend/node_modules/font-awesome/css/font-awesome.min.css",
-              "/home/admin1/issueTrackingToolFrontend/node_modules/quill/dist/quill.bubble.css",
-              "/home/admin1/issueTrackingToolFrontend/node_modules/quill/dist/quill.snow.css",
-              "/home/admin1/issueTrackingToolFrontend/node_modules/bootstrap/dist/css/bootstrap.min.css"
+              "/home/ashish/edw_proj2@IssueTool_Frontend/node_modules/font-awesome/css/font-awesome.min.css",
+              "/home/ashish/edw_proj2@IssueTool_Frontend/node_modules/quill/dist/quill.bubble.css",
+              "/home/ashish/edw_proj2@IssueTool_Frontend/node_modules/quill/dist/quill.snow.css",
+              "/home/ashish/edw_proj2@IssueTool_Frontend/node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [
-              "/home/admin1/issueTrackingToolFrontend/node_modules/jquery/dist/jquery.min.js",
-              "/home/admin1/issueTrackingToolFrontend/node_modules/popper.js/dist/umd/popper.js",
-              "/home/admin1/issueTrackingToolFrontend/node_modules/bootstrap/dist/js/bootstrap.min.js"
+              "/home/ashish/edw_proj2@IssueTool_Frontend/node_modules/jquery/dist/jquery.min.js",
+              "/home/ashish/edw_proj2@IssueTool_Frontend/node_modules/popper.js/dist/umd/popper.js",
+              "/home/ashish/edw_proj2@IssueTool_Frontend/node_modules/bootstrap/dist/js/bootstrap.min.js"
             ]
           },
           "configurations": {

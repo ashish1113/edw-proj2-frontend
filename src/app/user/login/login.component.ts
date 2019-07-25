@@ -22,8 +22,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
 
-    this.bodyTag.classList.add('login-page');
-    this.htmlTag.classList.add('login-page');
+    // this.bodyTag.classList.add('login-page');
+    // this.htmlTag.classList.add('login-page');
   }
 
   public redirectToSignUp: any = () => {

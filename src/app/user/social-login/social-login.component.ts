@@ -40,7 +40,7 @@ export class SocialLoginComponent implements OnInit {
 
       Cookie.set('authToken', authToken, 1, "/");
 
-      Cookie.set('socialFlag','true');
+      Cookie.set('socialFlag',"true");
 
       Cookie.set('userId', data.data.data.userId, 1, "/");
 
@@ -49,7 +49,10 @@ export class SocialLoginComponent implements OnInit {
       Cookie.set('fullName', data.data.data.firstName + ' ' + data.data.data.lastName, 1, "/");
 
       this.AppService.setUserInfoInLocalStorage(data.data.data)
-      this.router.navigate([`/userDashboard`])
+      setTimeout(() => {
+        this.router.navigate([`/userDashboard`])   
+      }, 10);
+      
       console.log('data for authToken is : ', data.data.data)
 
     })
