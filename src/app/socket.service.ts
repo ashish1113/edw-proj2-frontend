@@ -14,7 +14,7 @@ import { HttpErrorResponse, HttpParams } from "@angular/common/http";
 })
 export class SocketService {
   // private url = 'http://localhost:3000';
-  private url = 'http://192.168.1.82:3000';
+  private url = 'http://api.essindia.club';
   public socket;
 
   constructor(public http: HttpClient) { 

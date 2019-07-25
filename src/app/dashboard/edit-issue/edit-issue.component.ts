@@ -47,12 +47,9 @@ export class EditIssueComponent implements OnInit {
 
 
     this.authToken = Cookie.get('authToken');
-    //this.userInfo = this.AppService.getUserInfoFromLocalstorage();
     console.log('the user Info are', this.userInfo)
     this.fullName = Cookie.get('fullName');
     this.firstChar = this.fullName[0];
-    // this.issueReporterEmail = this.userInfo.email;
-    // this.issueReporterName = this.fullName;
 
     if (this.currentIssueId === undefined || this.currentIssueId === '' || this.currentIssueId === null) {
       this.toastr.errorToastr('select an issue to edit');
@@ -88,7 +85,7 @@ export class EditIssueComponent implements OnInit {
 
         this.issueScreenShotPath = apiResponse.data.screenshotPath;
 
-        this.issueScreenShot = `http://192.168.1.82:3000/${this.issueScreenShotPath}`
+        this.issueScreenShot = `http://api.essindia.club/${this.issueScreenShotPath}`
 
 
         this.displayToken = true;
@@ -166,7 +163,6 @@ export class EditIssueComponent implements OnInit {
         data => {
           console.log('edited  data is: ', data)
           this.toastr.successToastr("issue edited")
-          // this.router.navigate(['/user-dashboard']);
           setTimeout(() => {
             this.router.navigate(['/issue-description-view']);
           }, 1000)
@@ -181,14 +177,12 @@ export class EditIssueComponent implements OnInit {
         }
       )
 
-      //this.toCheckCreateFunTemp(formData)
 
     } else {
       this.AppService.editIssue(this.currentIssueId, currentFormData).subscribe(
         data => {
           console.log('edited  data is: ', data)
           this.toastr.successToastr("issue edited")
-          // this.router.navigate(['/user-dashboard']);
           setTimeout(() => {
             this.router.navigate(['/issue-description-view']);
           }, 1000)

@@ -15,7 +15,7 @@ import { Options } from 'selenium-webdriver/opera';
 })
 export class AppService {
   // private url = 'http://localhost:3000';
-  private url = 'http://192.168.1.82:3000';
+  private url = 'http://api.essindia.club';
 
   constructor(public http: HttpClient, public router: Router) { }
 

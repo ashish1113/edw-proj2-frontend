@@ -44,7 +44,7 @@ export class IssueDescriptionViewComponent implements OnInit {
   public watcherList: any = [];
   public watcherFlag = false;
   public watcherEmail: string;
-  public socialFlag: string ;
+  public socialFlag: string;
 
 
   constructor(public AppService: AppService, private location: Location, public toastr: ToastrManager, private _route: ActivatedRoute, private router: Router, private el: ElementRef) { }
@@ -58,7 +58,7 @@ export class IssueDescriptionViewComponent implements OnInit {
     this.fullName = Cookie.get('fullName');
     this.watcherEmail = Cookie.get('email');
     this.commenterEmail = Cookie.get('email');
-    //this.firstChar = this.fullName[0];
+
     this.issueId = Cookie.get('IssueSelected-Id');
 
     this.getAllInfoOfAnIssue(this.issueId);
@@ -162,7 +162,7 @@ export class IssueDescriptionViewComponent implements OnInit {
   public WriteComment(): any {
 
     if (this.comment == undefined || this.comment == '' || this.comment == null) {
-      //alert("enter comment to add")
+
       this.toastr.errorToastr("no comment entered", 'Oops!')
     }
     else {
@@ -198,7 +198,7 @@ export class IssueDescriptionViewComponent implements OnInit {
     else {
       this.AppService.ViewComment(this.issueId).subscribe(
         (apiResponse) => {
-          //this.commentArray = apiResponse['data'];
+
           console.log(apiResponse);
           this.commentArray = [];
           if (apiResponse.data != null) {
