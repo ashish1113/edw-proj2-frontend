@@ -52,7 +52,7 @@ export class CreateIssueComponent implements OnInit {
     console.log('the user Info are', this.userInfo)
     this.fullName = Cookie.get('fullName');
     this.socialFlag = Cookie.get('socialFlag')
-    //this.firstChar = this.fullName[0];
+    
     this.issueReporterEmail = Cookie.get('email')
     this.issueReporterName = this.fullName
 
@@ -109,9 +109,8 @@ export class CreateIssueComponent implements OnInit {
     formData.append('assigneeName', this.issueAssigneeName);
     formData.append('reporterEmail', this.issueReporterEmail);
 
-    // import { FileUploader} from 'ng2-file-upload';
 
-    if (fileCount > 0) { // a file was selected
+    if (fileCount > 0) { 
       for (let i = 0; i < fileCount; i++) {
         formData.append('image', inputEl.files[i]);
 

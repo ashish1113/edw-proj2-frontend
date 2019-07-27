@@ -25,7 +25,7 @@ import { QuillModule } from 'ngx-quill'
     RouterModule.forChild([
       {path:'userDashboard', component: UserDashboardComponent, canActivate:[RouteGaurdService]},
       {path:'loggedin/userDashboard', component: UserDashboardComponent, canActivate:[RouteGaurdService]},
-      //{path:'userDashboard', component: UserDashboardComponent},
+    
       {path:'issue-description-view', component: IssueDescriptionViewComponent, canActivate:[RouteGaurdService]},
       {path:'create-issue', component: CreateIssueComponent, canActivate:[RouteGaurdService]},
       {path:'edit-issue', component: EditIssueComponent, canActivate:[RouteGaurdService]},

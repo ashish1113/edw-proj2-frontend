@@ -74,7 +74,7 @@ export class SignupComponent implements OnInit {
           this.Toastr.errorToastr(apiResponse.message);
         }
       }, (err) => {
-        this.Toastr.errorToastr('some error occured');
+        this.Toastr.errorToastr('some Error occured');
       });
     }
 
